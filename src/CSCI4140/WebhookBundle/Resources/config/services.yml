@@ -1,0 +1,4 @@
+services:
+   csci4140_webhook.handler:
+       class: CSCI4140\WebhookBundle\Service\WebhookHandler
+       arguments: { secret : '4140_webhook_secret!@' }

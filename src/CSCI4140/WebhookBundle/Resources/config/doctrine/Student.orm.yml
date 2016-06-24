@@ -1,0 +1,34 @@
+CSCI4140\WebhookBundle\Entity\Student:
+    type: entity
+    table: null
+    repositoryClass: CSCI4140\WebhookBundle\Repository\StudentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToMany:
+        submissions:
+            targetEntity: CSCI4140\WebhookBundle\Entity\Submission
+            mappedBy: student
+    fields:
+        name:
+            type: string
+            length: 255
+        studentId:
+            type: string
+            length: '10'
+            unique: true
+        account:
+            type: string
+            length: 255
+            nullable: true
+            unique: true
+        createdAt:
+            type: datetime
+        modifiedAt:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [ updateTimestamp ]
+        preUpdate: [ updateTimestamp ]

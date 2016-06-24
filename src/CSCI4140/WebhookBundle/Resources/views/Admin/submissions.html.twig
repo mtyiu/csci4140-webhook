@@ -1,0 +1,86 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+{% include 'CSCI4140WebhookBundle:Admin:nav.html.twig' %}
+<div class="container">
+	<h3>
+		<small>CSCI 4140: Assignment Management System</small><br />
+		List All Submissions
+	</h3>
+	<h5>{{ assignment }}</h5>
+	<hr />
+	<form class="form-inline" id="filter-form">
+		<div class="form-group">
+			<label for="account" style="padding-right: 10px;">Filter by GitHub Account:</label>
+			<input type="text" class="form-control" id="account" value="{{ current.account }}" />
+		</div>
+		<button type="submit" class="btn btn-default">Filter</button>
+	</form>
+	<hr />
+	<table class="table table-hover">
+		<thead>
+			<th>#</a></th>
+			<th>Submission Time</a></th>
+			<th>Student ID</th>
+			<th>Name</th>
+			<th>Branch</a></th>
+			<th>Latest Commit</a></th>
+			<th>Repository</a></th>
+		</thead>
+		<tbody>
+			{% for s in submissions %}
+			<tr{{ s.ref == 'master' ? '' : ' class="warning"' }}>
+				<td>{{ loop.index }}</td>
+				<td>{{ s.submittedAt|date( 'Y-m-d H:i:s' ) }}</td>
+				{% if s.student %}
+					<td>{{ s.student.studentId }}</td>
+					<td>{{ s.student.name }}</td>
+				{% else %}
+					<td colspan="2">
+						<em>(Not registered) GitHub user name: </em>
+						<strong>
+							<a href="https://www.github.com/{{ s.account }}" target="_blank">{{ s.account }}</a>
+						</strong>
+					</td>
+				{% endif %}
+				{% if s.ref == 'master' %}
+					<td>{{ s.ref }}</td>
+				{% else %}
+					<td class="text-warning">
+						<span data-toggle="tooltip" data-placement="right" title="Only submission to the master branch is accepted.">
+							{{ s.ref }}
+							<i class="fa fa-info-circle"></i>
+						</span>
+					</td>
+				{% endif %}
+				<td>
+					{{ s.head }}
+				</td>
+				<td><a href="https://www.github.com/{{ s.repositoryFullName }}" target="_blank"><i class="fa fa-github"></i> {{ s.repositoryFullName }}</a></td>
+			</tr>
+			{% else %}
+			<tr>
+				<td colspan="7">
+					<p class="lead text-center">
+						No submission found
+					</p>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+	$( function() {
+		$( '[data-toggle="tooltip"]' ).tooltip()
+		$( '#filter-form' ).submit( function( e ) {
+			e.preventDefault()
+			var url = '{{ path( 'csci4140_webhook_admin_list_submissions', { assignment : current.assignment } ) }}/' + $( this ).find( '#account' ).val()
+			location.href = url
+		} )
+	} )
+</script>
+{% endblock %}

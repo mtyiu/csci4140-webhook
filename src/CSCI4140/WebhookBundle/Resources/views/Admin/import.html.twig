@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+{% include 'CSCI4140WebhookBundle:Admin:nav.html.twig' %}
+<div class="container">
+	<h3>
+		<small>CSCI 4140: Assignment Management System</small><br />
+		Import Students
+	</h3>
+	<hr />
+	<table class="table table-hover">
+		<thead>
+			<th>#</th>
+			<th>Student ID</th>
+			<th>Name</th>
+			<th>GitHub Account</th>
+		</thead>
+		<tbody>
+			{% for s in students %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ s[ 0 ] }}</td>
+				<td>{{ s[ 1 ] }}</td>
+				<td>{{ s[ 2 ] }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

@@ -1,0 +1,3 @@
+csci4140_webhook:
+    resource: "@CSCI4140WebhookBundle/Resources/config/routing.yml"
+    prefix:   /

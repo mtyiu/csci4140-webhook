@@ -1,0 +1,39 @@
+CSCI4140\WebhookBundle\Entity\Submission:
+    type: entity
+    table: null
+    repositoryClass: CSCI4140\WebhookBundle\Repository\SubmissionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        student:
+            targetEntity: CSCI4140\WebhookBundle\Entity\Student
+            inversedBy: submissions
+            joinColumn:
+                referencedColumnName: id
+    fields:
+        account:
+            type: string
+            length: 255
+            nullable: true
+        submittedAt:
+            type: datetime
+        assignment:
+            type: smallint
+        ref:
+            type: string
+            length: 255
+        head:
+            type: string
+            length: 255
+        repositoryName:
+            type: string
+            length: 255
+        repositoryFullName:
+            type: string
+            length: 255
+    lifecycleCallbacks:
+        prePersist: [ updateTimestamp ]

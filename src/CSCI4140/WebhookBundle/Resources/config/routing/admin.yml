@@ -1,0 +1,15 @@
+csci4140_webhook_admin_index:
+    path:     /
+    defaults: { _controller: CSCI4140WebhookBundle:Admin:index }
+
+# csci4140_webhook_admin_import:
+#     path:     /import
+#     defaults: { _controller: CSCI4140WebhookBundle:Admin:import }
+
+csci4140_webhook_admin_list_students:
+    path:     /students/{sort}
+    defaults: { _controller: CSCI4140WebhookBundle:Admin:listStudents, sort : 'id' }
+
+csci4140_webhook_admin_list_submissions:
+    path:     /submissions/{assignment}/{account}
+    defaults: { _controller: CSCI4140WebhookBundle:Admin:listSubmissions, account : null }

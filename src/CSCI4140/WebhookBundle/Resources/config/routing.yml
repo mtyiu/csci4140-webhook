@@ -1,0 +1,22 @@
+csci4140_webhook_github:
+    resource: "@CSCI4140WebhookBundle/Resources/config/routing/github.yml"
+    prefix:   /submit
+
+csci4140_webhook_jsonp:
+    resource: "@CSCI4140WebhookBundle/Resources/config/routing/jsonp.yml"
+    prefix:   /jsonp
+
+csci4140_webhook_admin:
+    resource: "@CSCI4140WebhookBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
+
+csci4140_webhook_default:
+    resource: "@CSCI4140WebhookBundle/Resources/config/routing/default.yml"
+    prefix:   /
+
+remove_trailing_slash:
+    path: /{url}
+    defaults: { _controller: CSCI4140WebhookBundle:Default:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]

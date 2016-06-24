@@ -1,0 +1,4 @@
+csci4140_webhook_github_submit:
+    path:     /{assignment}
+    defaults: { _controller: CSCI4140WebhookBundle:GitHub:submit }
+    methods:  [ POST ]

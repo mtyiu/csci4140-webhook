@@ -1,0 +1,7 @@
+csci4140_webhook_default_homepage:
+    path:     /
+    defaults: { _controller: CSCI4140WebhookBundle:Default:index }
+
+csci4140_webhook_default_list:
+    path:     /{assignment}/{account}
+    defaults: { _controller: CSCI4140WebhookBundle:Default:list, account : null }

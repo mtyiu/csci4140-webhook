@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+{% include 'CSCI4140WebhookBundle:Admin:nav.html.twig' %}
+<div class="container">
+	<h3>
+		<small>CSCI 4140: Assignment Management System</small><br />
+		List All Students
+	</h3>
+	<hr />
+	<table class="table table-hover">
+		<thead>
+			<th><a href="{{ path( 'csci4140_webhook_admin_list_students', { sort : 'id' } ) }}">#</a></th>
+			<th><a href="{{ path( 'csci4140_webhook_admin_list_students', { sort : 'studentId' } ) }}">Student ID</a></th>
+			<th><a href="{{ path( 'csci4140_webhook_admin_list_students', { sort : 'name' } ) }}">Name</a></th>
+			<th><a href="{{ path( 'csci4140_webhook_admin_list_students', { sort : 'account' } ) }}">GitHub Account</a></th>
+		</thead>
+		<tbody>
+			{% for s in students %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ s.studentId }}</td>
+				<td>{{ s.name }}</td>
+				<td>
+					{% if s.account %}
+						<a href="https://github.com/{{ s.account }}" target="_blank">{{ s.account }} <i class="fa fa-github"></i></a>
+					{% else %}
+						<span class="text-muted">N/A</span>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}

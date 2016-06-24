@@ -1,0 +1,4 @@
+csci4140_webhook_jsonp_assignment:
+    path:     /{assignment}/{account}
+    defaults: { _controller: CSCI4140WebhookBundle:JSONP:list, account : null }
+    methods:  [ GET ]
